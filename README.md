@@ -1,4 +1,4 @@
-try-nexus
+Try nexus
 =========
 
-Does nexus.js works?
+Does [nexus.js](https://github.com/DaQuirm/nexus) work?
