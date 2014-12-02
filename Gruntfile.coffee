@@ -10,7 +10,7 @@ module.exports = (grunt) ->
 
 		watch:
 			app:
-				files: '<%= App.src.scripts %>'
+				files: '<%= App.src.scripts %>/*.coffee'
 				tasks: ['coffee']
 				options:
 					livereload: yes
