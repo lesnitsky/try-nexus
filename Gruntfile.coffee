@@ -20,7 +20,7 @@ module.exports = (grunt) ->
 				options:
 					sourceMap: yes
 				files:
-					'<%= App.build %>/app.js': '<%= App.src.scripts %>/app.coffee'
+					'<%= App.build %>/app.js': '<%= App.src.scripts %>/*.coffee'
 
 		connect:
 			livereload:
