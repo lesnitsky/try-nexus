@@ -46,7 +46,6 @@ AppView = (app) ->
 				nxt.Element 'button',
 					nxt.Class 'expand'
 					nxt.Text 'Create new item'
-					nxt.Attr 'autofocus'
 					nxt.Event 'click', ->
 						do app.create_new_item
 
