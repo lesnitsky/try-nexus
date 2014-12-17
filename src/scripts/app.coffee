@@ -3,8 +3,7 @@ ItemForm = (item, app) ->
 	nxt.Element 'div',
 		nxt.Element 'input',
 			nxt.Attr 'type', 'text'
-			nxt.Event 'input', (ev) ->
-				item.name = ev.target.value
+			nxt.ValueBinding item.name
 			nxt.Event 'keypress', (ev) ->
 				app.save_new_item item if ev.keyCode is 13
 		nxt.Element 'button',
@@ -18,12 +17,11 @@ ItemView = (app, item, state) ->
 		nxt.Class 'panel'
 		nxt.Binding state.edit, (edit) ->
 			if not edit
-				nxt.Text item.name
+				nxt.Text item.name.value
 			else
 				nxt.Element 'input',
-					nxt.Attr 'type', 'text',
-					nxt.Event 'input', (ev) ->
-						item.name = ev.target.value
+					nxt.Attr 'type', 'text'
+					nxt.ValueBinding item.name
 					nxt.Event 'blur', (ev) ->
 						if item.name
 							app.item_to_edit.value = null
@@ -46,12 +44,13 @@ AppView = (app) ->
 				nxt.Element 'button',
 					nxt.Class 'expand'
 					nxt.Text 'Create new item'
+					nxt.Attr 'autofocus'
 					nxt.Event 'click', ->
 						do app.create_new_item
 
 class Item
 	constructor: ->
-		@name = ""
+		@name = new nx.Cell value:''
 
 class App
 	constructor: ->
