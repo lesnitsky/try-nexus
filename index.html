@@ -30,6 +30,7 @@
 	body {
 		-webkit-user-select: none;
 		overflow: hidden;
+		display: flex;
 	}
 
 	ul {
@@ -37,7 +38,7 @@
 		padding: 0;
 	}
 
-	.panel {
+	.app.item-picker .panel {
 		margin-bottom: -1px;
 	}
 
@@ -48,12 +49,25 @@
 
 	.app {
 		height: 100%;
+		min-width: 100%;
+		max-height: 100%;
+		overflow: auto;
 	}
+
+	.app.nav > a.panel {
+		margin: 0;
+		display: block;
+	}
+
 	</style>
 </head>
 <body>
-	<div class="app item-picker"></div>
-	<div class="app list"></div>
+	<div class="app nav">
+		<a class="panel" href="#item-picker">Item picker</a>
+		<a class="panel" href="#list">list</a>
+	</div>
+	<div class="app item-picker" id="item-picker"></div>
+	<div class="app list" id="list"></div>
 	<script src="./build/app.js"></script>
 </body>
 </html>
