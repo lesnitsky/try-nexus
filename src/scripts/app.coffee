@@ -83,20 +83,35 @@ items = [
 
 ItemPicker = ($) ->
 	nxt.Element 'div',
-		nxt.Binding $.selected_item, (item) ->
-			if item
-				$.item_view item
-			else
-				nxt.Text $.placeholder
+		nxt.Element 'div',
+			nxt.Class 'panel'
+			nxt.Event 'click', $.toggle
+			nxt.Binding $.selected_item, (item) ->
+				if item
+					$.selected_item_view item
+				else
+					console.log $.placeholder
+					nxt.Text $.placeholder
 
-	nxt.Element 'ul',
-		nxt.Element 'li',
-			nxt.Element 'input',
-				nxt.Attr 'type', 'text'
-				nxt.ValueBinding $.filter
-		nxt.Collection $.filtered_items, (item) ->
-			nxt.Element 'li',
-				$.item_view item
+		nxt.Binding $.opened, (opened) ->
+			if opened
+				nxt.Element 'div',
+					nxt.Element 'div',
+						nxt.Class 'panel'
+						nxt.Element 'input',
+							nxt.Attr 'type', 'text'
+							nxt.ValueBinding $.filter
+					nxt.Element 'ul',
+						nxt.Attr 'style', 'overflow: auto; max-height: 300px; border: 1px solid #d8d8d8'
+						nxt.Collection $.filtered_items, (item) ->
+							nxt.Element 'li',
+								$.item_view item
+
+						nxt.Binding $.filtered_items, ({length}) ->
+							if not length
+								nxt.Element 'div',
+									nxt.Class 'panel'
+									nxt.Text 'No items to display'
 
 class ItemPickerVM
 	constructor: ({items, @item_view, @selected_item_view, @placeholder, @filter_key}) ->
@@ -104,6 +119,7 @@ class ItemPickerVM
 		@filtered_items = new nx.Collection items:items
 		@filter = new nx.Cell value:''
 		@selected_item = new nx.Cell value:null
+		@opened = new nx.Cell value:no
 
 		@filter.onvalue.add =>
 			@filtered_items.removeAll()
@@ -113,6 +129,9 @@ class ItemPickerVM
 
 			@filtered_items.append filtered...
 
+	toggle: =>
+		@opened.value = not @opened.value
+
 
 AppView = (app) ->
 	nxt.Element 'main',
@@ -120,6 +139,7 @@ AppView = (app) ->
 
 ItemView = (item) ->
 	nxt.Element 'div',
+		nxt.Class 'panel'
 		nxt.Element 'div',
 			nxt.Text item.name
 		nxt.Element 'div',
@@ -127,6 +147,7 @@ ItemView = (item) ->
 
 SelectedItemView = (item) ->
 	nxt.Element 'div',
+		nxt.Class 'panel'
 		nxt.Text item.name
 
 class App
