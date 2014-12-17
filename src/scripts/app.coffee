@@ -1,73 +1,142 @@
+items = [
+	{
+		"name": "Christi Ochoa",
+		"gender": "female"
+	},
+	{
+		"name": "Kerry Boyle",
+		"gender": "female"
+	},
+	{
+		"name": "Ruby Copeland",
+		"gender": "female"
+	},
+	{
+		"name": "Natasha Foley",
+		"gender": "female"
+	},
+	{
+		"name": "Louella Clark",
+		"gender": "female"
+	},
+	{
+		"name": "Katie Bell",
+		"gender": "female"
+	},
+	{
+		"name": "Osborne Barron",
+		"gender": "male"
+	},
+	{
+		"name": "Mitchell Lyons",
+		"gender": "male"
+	},
+	{
+		"name": "Taylor Morton",
+		"gender": "female"
+	},
+	{
+		"name": "Blanca Burks",
+		"gender": "female"
+	},
+	{
+		"name": "Victoria Reese",
+		"gender": "female"
+	},
+	{
+		"name": "Leta Palmer",
+		"gender": "female"
+	},
+	{
+		"name": "Sexton Jordan",
+		"gender": "male"
+	},
+	{
+		"name": "Courtney Garcia",
+		"gender": "female"
+	},
+	{
+		"name": "Cooke Mcdaniel",
+		"gender": "male"
+	},
+	{
+		"name": "Hardin Cameron",
+		"gender": "male"
+	},
+	{
+		"name": "Hale Ingram",
+		"gender": "male"
+	},
+	{
+		"name": "May Newman",
+		"gender": "female"
+	},
+	{
+		"name": "Bowen Meadows",
+		"gender": "male"
+	},
+	{
+		"name": "Park Vaughn",
+		"gender": "male"
+	}
+]
 
-ItemForm = (item, app) ->
+ItemPicker = ($) ->
 	nxt.Element 'div',
-		nxt.Element 'input',
-			nxt.Attr 'type', 'text'
-			nxt.ValueBinding item.name
-			nxt.Event 'keypress', (ev) ->
-				app.save_new_item item if ev.keyCode is 13
-		nxt.Element 'button',
-			nxt.Class 'expand'
-			nxt.Text 'Save'
-			nxt.Event 'click', ->
-				app.save_new_item item
-
-ItemView = (app, item, state) ->
-	nxt.Element 'div',
-		nxt.Class 'panel'
-		nxt.Binding state.edit, (edit) ->
-			if not edit
-				nxt.Text item.name.value
+		nxt.Binding $.selected_item, (item) ->
+			if item
+				$.item_view item
 			else
-				nxt.Element 'input',
-					nxt.Attr 'type', 'text'
-					nxt.ValueBinding item.name
-					nxt.Event 'blur', (ev) ->
-						if item.name
-							app.item_to_edit.value = null
-					nxt.Event 'keypress', (ev) ->
-						app.item_to_edit.value = null if ev.keyCode is 13
-		nxt.Event 'dblclick', ->
-			app.edit_item item
+				nxt.Text $.placeholder
+
+	nxt.Element 'ul',
+		nxt.Element 'li',
+			nxt.Element 'input',
+				nxt.Attr 'type', 'text'
+				nxt.ValueBinding $.filter
+		nxt.Collection $.filtered_items, (item) ->
+			nxt.Element 'li',
+				$.item_view item
+
+class ItemPickerVM
+	constructor: ({items, @item_view, @selected_item_view, @placeholder, @filter_key}) ->
+		@items = new nx.Collection items:items
+		@filtered_items = new nx.Collection items:items
+		@filter = new nx.Cell value:''
+		@selected_item = new nx.Cell value:null
+
+		@filter.onvalue.add =>
+			@filtered_items.removeAll()
+
+			filtered = @items.value.filter (item) =>
+				(item[@filter_key].indexOf @filter.value) isnt -1
+
+			@filtered_items.append filtered...
+
 
 AppView = (app) ->
 	nxt.Element 'main',
-		nxt.Collection app.items, (item) ->
-			nxt.Binding app.item_to_edit, (item_to_edit) ->
-				item_state =
-					edit: new nx.Cell value:no
-				item_state.edit.value = yes if item is item_to_edit
-				ItemView app, item, item_state
+		ItemPicker app.item_picker_vm
 
-		nxt.Binding app.new_item, (new_item) ->
-			if new_item
-				ItemForm app.new_item.value, app
-			else
-				nxt.Element 'button',
-					nxt.Class 'expand'
-					nxt.Text 'Create new item'
-					nxt.Attr 'autofocus'
-					nxt.Event 'click', ->
-						do app.create_new_item
+ItemView = (item) ->
+	nxt.Element 'div',
+		nxt.Element 'div',
+			nxt.Text item.name
+		nxt.Element 'div',
+			nxt.Text item.gender
 
-class Item
-	constructor: ->
-		@name = new nx.Cell value:''
+SelectedItemView = (item) ->
+	nxt.Element 'div',
+		nxt.Text item.name
 
 class App
 	constructor: ->
-		@items = new nx.Collection
-		@new_item = new nx.Cell value:null
-		@item_to_edit = new nx.Cell value:null
+		@item_picker_vm = new ItemPickerVM
+			items: items
+			placeholder: 'Pick item'
+			item_view: ItemView
+			selected_item_view: SelectedItemView
+			filter_key: 'name'
 
-	create_new_item : ->
-		@new_item.value = new Item
-
-	save_new_item: (new_item) ->
-		@items.append new_item
-		@new_item.value = null
-
-	edit_item: (item_to_edit) ->
-		@item_to_edit.value = item_to_edit
 
 document.body.appendChild(AppView(new App).data.node)
