@@ -25,6 +25,8 @@ ItemView = (app, item, state) ->
 					nxt.Event 'blur', (ev) ->
 						if item.name
 							app.item_to_edit.value = null
+					nxt.Event 'keypress', (ev) ->
+						app.item_to_edit.value = null if ev.keyCode is 13
 		nxt.Event 'dblclick', ->
 			app.edit_item item
 
