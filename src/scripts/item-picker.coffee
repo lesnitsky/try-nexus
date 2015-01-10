@@ -121,13 +121,9 @@ class ItemPickerVM
 		@selected_item = new nx.Cell value:null
 		@opened = new nx.Cell value:no
 
-		@filter.onvalue.add =>
-			@filtered_items.removeAll()
-
-			filtered = @items.value.filter (item) =>
+		@filtered_items.bind @filter, '<-', (filter) =>
+			@items.value.filter (item) =>
 				(item[@filter_key].indexOf @filter.value) isnt -1
-
-			@filtered_items.append filtered...
 
 	toggle: =>
 		@opened.value = not @opened.value
