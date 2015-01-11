@@ -90,7 +90,6 @@ ItemPicker = ($) ->
 				if item
 					$.selected_item_view item
 				else
-					console.log $.placeholder
 					nxt.Text $.placeholder
 
 		nxt.Binding $.opened, (opened) ->
@@ -106,6 +105,8 @@ ItemPicker = ($) ->
 						nxt.Collection $.filtered_items, (item) ->
 							nxt.Element 'li',
 								$.item_view item
+								nxt.Event 'click', ->
+									$.select item
 
 						nxt.Binding $.filtered_items, ({length}) ->
 							if not length
@@ -128,6 +129,9 @@ class ItemPickerVM
 	toggle: =>
 		@opened.value = not @opened.value
 
+	select: (item) ->
+		@selected_item.value = item
+
 
 AppView = (app) ->
 	nxt.Element 'main',
@@ -143,7 +147,6 @@ ItemView = (item) ->
 
 SelectedItemView = (item) ->
 	nxt.Element 'div',
-		nxt.Class 'panel'
 		nxt.Text item.name
 
 class App
