@@ -4,89 +4,12 @@
 	<meta charset="UTF-8">
 	<title>Document</title>
 	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/foundation/5.3.1/css/foundation.css">
-	<script src="https://rawgit.com/DaQuirm/nexus/release/0.4.0/src/core/utils.js"></script>
-	<script src="https://rawgit.com/DaQuirm/nexus/release/0.4.0/src/core/ajax-model.js"></script>
-	<script src="https://rawgit.com/DaQuirm/nexus/release/0.4.0/src/core/binding.js"></script>
-	<script src="https://rawgit.com/DaQuirm/nexus/release/0.4.0/src/core/cell.js"></script>
-	<script src="https://rawgit.com/DaQuirm/nexus/release/0.4.0/src/core/collection.js"></script>
-	<script src="https://rawgit.com/DaQuirm/nexus/release/0.4.0/src/core/event.js"></script>
-	<script src="https://rawgit.com/DaQuirm/nexus/release/0.4.0/src/core/mapping.js"></script>
-	<script src="https://rawgit.com/DaQuirm/nexus/release/0.4.0/src/nxt/renderers/attr-renderer.js"></script>
-	<script src="https://rawgit.com/DaQuirm/nexus/release/0.4.0/src/nxt/renderers/class-renderer.js"></script>
-	<script src="https://rawgit.com/DaQuirm/nexus/release/0.4.0/src/nxt/renderers/event-renderer.js"></script>
-	<script src="https://rawgit.com/DaQuirm/nexus/release/0.4.0/src/nxt/renderers/node-renderer.js"></script>
-	<script src="https://rawgit.com/DaQuirm/nexus/release/0.4.0/src/nxt/command-binding.js"></script>
-	<script src="https://rawgit.com/DaQuirm/nexus/release/0.4.0/src/nxt/command-cell.js"></script>
-	<script src="https://rawgit.com/DaQuirm/nexus/release/0.4.0/src/nxt/command-cell-model.js"></script>
-	<script src="https://rawgit.com/DaQuirm/nexus/release/0.4.0/src/nxt/command.js"></script>
-	<script src="https://rawgit.com/DaQuirm/nexus/release/0.4.0/src/nxt/content-region.js"></script>
-	<script src="https://rawgit.com/DaQuirm/nexus/release/0.4.0/src/nxt/content-renderer.js"></script>
-	<script src="https://rawgit.com/DaQuirm/nexus/release/0.4.0/src/nxt/helpers.js"></script>
-	<script src="https://rawgit.com/DaQuirm/nexus/release/0.4.0/src/rest/rest-collection.js"></script>
-	<script src="https://rawgit.com/DaQuirm/nexus/release/0.4.0/src/rest/rest-document.js"></script>
-	<style>
-	main {
-		width: 800px;
-		margin: 20px auto;
-	}
-
-	body {
-		-webkit-user-select: none;
-		overflow: hidden;
-		display: flex;
-	}
-
-	ul {
-		margin: 0;
-		padding: 0;
-	}
-
-	.app.item-picker .panel {
-		margin-bottom: -1px;
-	}
-
-	ul > li {
-		list-style-type: none;
-		overflow: hidden;
-	}
-
-	.app {
-		height: 100%;
-		min-width: 100%;
-		max-height: 100%;
-		overflow: auto;
-	}
-
-	.app.nav > a.panel {
-		margin: 0;
-		display: block;
-	}
-
-	.app.todo-mvc li .panel.done {
-		text-decoration: line-through;
-	}
-
-	.app.todo-mvc .panel * {
-		margin: 0;
-	}
-
-	.app.todo-mvc .error {
-		border-color: red;
-	}
-
-	</style>
+	<link rel="stylesheet" href="style/base.css">
 </head>
 <body>
-	<div class="app nav">
-		<a class="panel" href="#item-picker">Item picker</a>
-		<a class="panel" href="#todo-mvc">ToDo MVC</a>
-	</div>
-	<div class="app item-picker" id="item-picker"></div>
-	<div class="app todo-mvc" id="todo-mvc"></div>
-	<script src="./dist/app.js"></script>
-	<script>
-	ItemPicker(document.querySelector('#item-picker'));
-	ToDoMVC(document.querySelector('#todo-mvc'));
-	</script>
+<div class="app nav">
+	<a class="panel" href="./item-picker.html">Item picker</a>
+	<a class="panel" href="./todo-mvc.html">ToDo MVC</a>
+</div>
 </body>
 </html>

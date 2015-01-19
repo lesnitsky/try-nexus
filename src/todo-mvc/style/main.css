@@ -1,0 +1,11 @@
+.app.todo-mvc li .panel.done {
+	text-decoration: line-through;
+}
+
+.app.todo-mvc .panel * {
+	margin: 0;
+}
+
+.app.todo-mvc .error {
+	border-color: red;
+}

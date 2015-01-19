@@ -1,48 +1,3 @@
-class ToDoItem
-	constructor: ->
-		@content = new nx.Cell value:null
-		@done = new nx.Cell value:no
-		@edit = new nx.Cell value:no
-
-	toggle_done: ->
-		@done.value = not @done.value
-
-	toggle_edit: ->
-		@edit.value = not @edit.value
-
-	save: ->
-		@toggle_edit() if @content.value.length > 0
-
-class App
-	constructor: ->
-		@items = new nx.Collection
-		@new_item = new nx.Cell value: new ToDoItem
-
-	add_todo: ->
-		@items.append @new_item.value
-		@new_item.value = new ToDoItem
-
-	remove_todo: (item) ->
-		@items.remove item
-
-AppView = (app) ->
-	nxt.Element 'main',
-		nxt.Binding app.new_item, (item) ->
-			nxt.Element 'input',
-				nxt.Attr 'type', 'text'
-				nxt.ValueBinding item.content
-				nxt.Event 'keypress', ({keyCode}) ->
-					if keyCode is 13
-						app.add_todo()
-
-		ToDoListView app, app.items
-
-ToDoListView = (app, items) ->
-	nxt.Collection items, (item) ->
-		nxt.Element 'ul',
-			nxt.Element 'li',
-				ToDoItemView app, item
-
 ToDoItemView = (app, item) ->
 	nxt.Element 'div',
 		nxt.Class 'panel'
@@ -94,5 +49,4 @@ ToDoItemView = (app, item) ->
 				nxt.Event 'click', ->
 					app.remove_todo item
 
-module.exports = (node) ->
-	node.appendChild(AppView(new App).data.node)
+module.exports = ToDoItemView

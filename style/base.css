@@ -1,0 +1,32 @@
+main {
+	width: 800px;
+	margin: 20px auto;
+}
+
+body {
+	-webkit-user-select: none;
+	overflow: hidden;
+	display: flex;
+}
+
+ul {
+	margin: 0;
+	padding: 0;
+}
+
+ul > li {
+	list-style-type: none;
+	overflow: hidden;
+}
+
+.app {
+	height: 100%;
+	min-width: 100%;
+	max-height: 100%;
+	overflow: auto;
+}
+
+.app.nav > a.panel {
+	margin: 0;
+	display: block;
+}
