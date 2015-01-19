@@ -62,15 +62,27 @@
 		display: block;
 	}
 
+	.app.todo-mvc li .panel.done {
+		text-decoration: line-through;
+	}
+
+	.app.todo-mvc .panel * {
+		margin: 0;
+	}
+
+	.app.todo-mvc .error {
+		border-color: red;
+	}
+
 	</style>
 </head>
 <body>
 	<div class="app nav">
 		<a class="panel" href="#item-picker">Item picker</a>
-		<a class="panel" href="#list">list</a>
+		<a class="panel" href="#todo-mvc">ToDo MVC</a>
 	</div>
 	<div class="app item-picker" id="item-picker"></div>
-	<div class="app list" id="list"></div>
+	<div class="app todo-mvc" id="todo-mvc"></div>
 	<script src="./build/app.js"></script>
 </body>
 </html>
