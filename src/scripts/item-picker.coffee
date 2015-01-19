@@ -158,5 +158,5 @@ class App
 			selected_item_view: SelectedItemView
 			filter_key: 'name'
 
-document.querySelector '.app.item-picker'
-	.appendChild(AppView(new App).data.node)
+module.exports = (node) ->
+	node.appendChild(AppView(new App).data.node)

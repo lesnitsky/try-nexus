@@ -59,7 +59,7 @@ ToDoItemView = (app, item) ->
 					nxt.Binding item.done, (done) ->
 						nxt.Attr 'checked' if item.done.value
 
-				nxt.Element 'label', 
+				nxt.Element 'label',
 
 					nxt.Event 'click', (e) ->
 						item.toggle_done()
@@ -94,5 +94,5 @@ ToDoItemView = (app, item) ->
 				nxt.Event 'click', ->
 					app.remove_todo item
 
-document.querySelector '.app.todo-mvc'
-	.appendChild(AppView(new App).data.node)
+module.exports = (node) ->
+	node.appendChild(AppView(new App).data.node)
