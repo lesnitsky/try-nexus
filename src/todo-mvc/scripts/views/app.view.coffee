@@ -1,4 +1,5 @@
 ToDoListView = require './todo-list.view.coffee'
+FooterView   = require './footer.view.coffee'
 
 AppView = (app) ->
 	nxt.Element 'section',
@@ -18,9 +19,8 @@ AppView = (app) ->
 						if keyCode is 13
 							app.add_todo()
 
-		nxt.Binding app.items.length, (length) ->
-			if length > 0
-				ToDoListView app, app.items
+		ToDoListView app
+		FooterView app
 
 
 module.exports = AppView

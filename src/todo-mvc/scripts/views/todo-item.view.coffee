@@ -3,6 +3,9 @@ ToDoItemView = (app, item) ->
 		nxt.Binding item.edit, (edit) ->
 			nxt.Class 'editing' if edit
 
+		nxt.Binding item.done, (done) ->
+			nxt.Class 'completed' if done
+
 		nxt.Element 'div',
 			nxt.Class 'view'
 
@@ -15,7 +18,7 @@ ToDoItemView = (app, item) ->
 				nxt.Binding item.done, (done) ->
 					nxt.Attr 'checked' if item.done.value
 				nxt.Event 'click', (e) ->
-					item.toggle_done()
+					app.toggle_done item
 
 			nxt.Element 'label',
 				nxt.Event 'dblclick', ->
