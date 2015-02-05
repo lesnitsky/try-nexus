@@ -23,7 +23,7 @@ ToDoItemView = (app, item) ->
 			nxt.Element 'label',
 				nxt.Event 'dblclick', ->
 					item.toggle_edit()
-				nxt.Text item.content.value
+				nxt.Binding item.content, nxt.Text
 
 			nxt.Element 'button',
 				nxt.Class 'destroy'
