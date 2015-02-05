@@ -16,14 +16,14 @@ ToDoItemView = (app, item) ->
 				nxt.Attr 'type', 'checkbox'
 				nxt.Class 'toggle'
 				nxt.Binding item.done, (done) ->
-					nxt.Attr 'checked' if item.done.value
+					nxt.Attr 'checked' if done
 				nxt.Event 'click', (e) ->
 					app.toggle_done item
 
 			nxt.Element 'label',
 				nxt.Event 'dblclick', ->
 					item.toggle_edit()
-				nxt.Text item.content.value
+				nxt.Binding item.content, nxt.Text
 
 			nxt.Element 'button',
 				nxt.Class 'destroy'
