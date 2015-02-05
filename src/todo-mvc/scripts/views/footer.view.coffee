@@ -3,12 +3,7 @@ ItemsLeftView = (count) ->
 		nxt.Attr 'id', 'todo-count'
 
 			nxt.Element 'strong',
-				nxt.Text "#{count} "
-
-			if count is 1
-				nxt.Text 'item left'
-			else
-				nxt.Text 'items left'
+				nxt.Text "#{count} item#{if count > 1 then 's' else ''}"
 
 FilterView = (app, filter_content, bound_items) ->
 	nxt.Element 'li',
