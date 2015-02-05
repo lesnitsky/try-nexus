@@ -4,7 +4,7 @@ ToDoListView = (app) ->
 		nxt.Element 'section',
 
 			nxt.Binding app.items.length, (length) ->
-				nxt.Attr 'style', 'display:none' if length is 0
+				nxt.Style display:'none' if length is 0
 
 			nxt.Binding app.visible_items, (items) ->
 				nxt.Attr 'id', 'main'
