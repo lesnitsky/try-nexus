@@ -5,11 +5,42 @@
 	<title>Document</title>
 	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/foundation/5.3.1/css/foundation.css">
 	<link rel="stylesheet" href="style/base.css">
+	<link rel="import" href="./nexus-import.html">
 </head>
 <body>
-<div class="app nav">
-	<a class="panel" href="./item-picker.html">Item picker</a>
-	<a class="panel" href="./todo-mvc.html">ToDo MVC</a>
-</div>
+<script>
+	var apps = [
+		'item-picker',
+		'todo-mvc'
+	];
+
+	var nxApps = new nx.Collection({ items: apps });
+
+	function AppView() {
+		return nxt.Element(
+			'div',
+			nxt.Class('app'),
+			nxt.Class('nav'),
+			nxt.Collection(nxApps, function (appName) {
+				return nxt.Element(
+					'a',
+					nxt.Class('panel'),
+					nxt.Attr('href', './' + appName + '.html'),
+					nxt.Text(
+						appName
+							.split('-')
+							.map(function (name) {
+								return name[0].toUpperCase() + name.substr(1)
+							})
+							.join(' ')
+					)
+				)
+			})
+		);
+	}
+
+	document.body.appendChild(AppView().data.node);
+
+</script>
 </body>
 </html>
