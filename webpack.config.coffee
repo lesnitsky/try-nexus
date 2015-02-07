@@ -5,6 +5,7 @@ module.exports =
 	entry:
 		'item-picker': './src/item-picker/scripts/index.coffee'
 		'todo-mvc'   : './src/todo-mvc/scripts/index.coffee'
+		'priority-list'   : './src/priority-list/scripts/index.coffee'
 	output:
 		path: path.join __dirname, "dist"
 		publicPath: 'dist/'
