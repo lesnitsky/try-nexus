@@ -1,11 +1,19 @@
 path = require 'path'
+fs   = require 'fs'
+
+pathToApps = path.join __dirname, 'src'
+apps = fs.readdirSync(pathToApps)
+	.filter (file) ->
+		fs.statSync(pathToApps, file)
+			.isDirectory()
+
+entry = {}
+apps.forEach (appName) ->
+	entry[appName] = "./src/#{appName}/scripts/index.coffee"
 
 module.exports =
 	cache: yes
-	entry:
-		'item-picker': './src/item-picker/scripts/index.coffee'
-		'todo-mvc'   : './src/todo-mvc/scripts/index.coffee'
-		'priority-list'   : './src/priority-list/scripts/index.coffee'
+	entry: entry
 	output:
 		path: path.join __dirname, "dist"
 		publicPath: 'dist/'
