@@ -18,7 +18,10 @@ ItemPickerView = ($) ->
 							nxt.Attr 'type', 'text'
 							nxt.ValueBinding $.filter
 					nxt.Element 'ul',
-						nxt.Attr 'style', 'overflow: auto; max-height: 300px; border: 1px solid #d8d8d8'
+						nxt.Style
+							'overflow':   'auto'
+							'max-height': '300px'
+							'border':     '1px solid #d8d8d8'
 						nxt.Collection $.filtered_items, (item) ->
 							nxt.Element 'li',
 								$.item_view item
