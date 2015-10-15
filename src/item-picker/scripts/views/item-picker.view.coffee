@@ -22,8 +22,7 @@ ItemPickerView = ($) ->
 						nxt.Collection $.filtered_items, (item) ->
 							nxt.Element 'li',
 								$.item_view item
-								nxt.Event 'click', ->
-									$.select item
+								nxt.Event 'click', $.selected_item, -> item
 
 						nxt.Binding $.filtered_items, ({length}) ->
 							if not length

@@ -18,7 +18,4 @@ class ItemPickerVM
 	toggle: =>
 		@opened.value = not @opened.value
 
-	select: (item) ->
-		@selected_item.value = item
-
 module.exports = ItemPickerVM
