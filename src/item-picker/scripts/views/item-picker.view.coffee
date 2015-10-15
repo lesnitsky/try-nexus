@@ -27,7 +27,7 @@ ItemPickerView = ($) ->
 								$.item_view item
 								nxt.Event 'click', $.selected_item, -> item
 
-						nxt.Binding $.filtered_items, ({length}) ->
+						nxt.Binding $.filtered_items.length, (length) ->
 							if not length
 								nxt.Element 'div',
 									nxt.Class 'panel'
