@@ -1,5 +1,6 @@
 path = require 'path'
 fs   = require 'fs'
+webpack = require 'webpack'
 
 pathToApps = path.join __dirname, 'src'
 apps = fs.readdirSync(pathToApps)
@@ -23,3 +24,10 @@ module.exports =
 		loaders: [
 			test: /\.coffee$/, loader: 'coffee'
 		]
+	resolve:
+		modulesDirectories: ['bower_components']
+	plugins: [
+		new webpack.ResolverPlugin(
+			new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin 'bower.json', ['main']
+		)
+	]

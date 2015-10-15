@@ -1,3 +1,5 @@
+{nx} = require 'nexus'
+
 # viewmodels
 ItemPickerVM                 = require './view-models/item-picker.vm.coffee'
 
