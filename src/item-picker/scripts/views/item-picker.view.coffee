@@ -1,3 +1,5 @@
+SortSwitchView = require './sort-switch-view.coffee'
+
 ItemPickerView = ($) ->
 	nxt.Element 'div',
 		nxt.Element 'div',
@@ -17,6 +19,7 @@ ItemPickerView = ($) ->
 						nxt.Element 'input',
 							nxt.Attr 'type', 'text'
 							nxt.ValueBinding $.filter
+						SortSwitchView $
 					nxt.Element 'ul',
 						nxt.Style
 							'overflow':   'auto'
